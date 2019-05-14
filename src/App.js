@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 import TodoList from "./components/TodoList"
 
 import { connect } from 'react-redux';
 
-import { addTodo } from './actions';
+import { addTodo, toggle, deleteTodo } from './actions';
 
 class App extends React.Component {
   state = {
@@ -27,21 +27,29 @@ class App extends React.Component {
   add = event => {
     event.preventDefault();
     this.props.addTodo(this.state.todo);
-    console.log("Hello")
     this.setState({
       todo: {
         value: "",
         completed: false
       }
     });
-    console.log("Yo")
+  }
+
+  toggle = (event, index, status) => {
+    event.preventDefault();
+    this.props.toggle(index, status);
+  }
+
+  deleteTodo = (e, index) => {
+    console.log("delete");
+    e.preventDefault();
+    this.props.deleteTodo(index);
   }
 
   render() {
     return (
       <div className="App">
-        {console.log(this.props)}
-        <TodoList todos={this.props.todosFromRedux}/>
+        <TodoList todos={this.props.todosFromRedux} toggle={this.toggle} deleteTodo={this.deleteTodo}/>
         <form className="form" onSubmit={(event) => this.add(event)}>
           <input
             placeholder="Add todo"
@@ -64,5 +72,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addTodo } // same as { changeTitle: changeTitle }
+  { addTodo, toggle, deleteTodo } // same as { changeTitle: changeTitle }
 )(App);

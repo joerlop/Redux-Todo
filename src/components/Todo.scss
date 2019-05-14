@@ -1,0 +1,32 @@
+.todo-container {
+    margin: 10px;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    
+        .todo {
+            width: 25%;
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            border: 1px solid lightgray;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    
+        button {
+            margin-left: 10px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: none;
+        }        
+    
+        .completed-true {
+            color: red;
+        }
+    }
+}
